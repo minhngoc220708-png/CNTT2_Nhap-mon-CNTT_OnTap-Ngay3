@@ -1,0 +1,51 @@
+### **PHẦN 1: TẠO FILE `README.md` (Bài 1)**
+```markdown
+# Trung Tâm Tiếng Anh TTA
+Dự án website quản lý học viên và học phí của **Trung tâm Tiếng Anh (TTA)**.
+## Giới thiệu
+Hệ thống giúp quản lý khóa học, học phí và thông tin học viên một cách nhanh chóng.
+## Cấu trúc thư mục
+| Thư mục | Mô tả |
+| :--- | :--- |
+| `data/` | Chứa file Excel học phí |
+| `docs/` | Tài liệu dự án |
+| `logs/` | Nhật ký hệ thống |
+## Quy trình đăng ký
+1. Chọn khóa học.
+2. Đăng ký thông tin.
+3. Đóng học phí.
+## Kiểm tra thư mục
+```powershell
+Get-ChildItem -Recurse
+```
+## Công việc
+* [x] Tạo README.md
+* [ ] Hoàn thành Excel
+> **Lưu ý:** Không upload file `.env` lên GitHub.
+```
+---
+### **PHẦN 2: LÀM BÀI EXCEL (Bài 2)**
+Mở file **`data/hoc_phi_thang_10.xlsx`** lên và làm theo từng bước:
+#### **1. Sheet `DangKy` (Điền từ dòng 2 đến 16):**
+**Cột E (Tên khóa học - ô E2):** 
+  Nhập công thức: `=VLOOKUP(C2, KhoaHoc!$A$2:$C$8, 2, FALSE)`
+*(Ý nghĩa: Lấy mã khóa ở ô C2, đi tìm trong bảng KhoaHoc, lấy nội dung ở cột số 2 điền vào đây).* Sau đó kéo công thức xuống hết 15 dòng.
+* **Cột F (Học phí - ô F2):** 
+  Nhập công thức: `=VLOOKUP(C2, KhoaHoc!$A$2:$C$8, 3, FALSE)`
+*(Lấy học phí ở cột số 3 trong bảng KhoaHoc).* Kéo công thức xuống hết 15 dòng.
+* **Cột G (Tổng học phí - ô G2):** 
+  Nhập công thức: `=D2*F2`
+*(Lấy số tháng nhân với học phí).* Kéo công thức xuống hết 15 dòng.
+#### **2. Sheet `KhoaHoc`:**
+* Tại ô **F2**, nhập công thức để kiểm tra: `=VLOOKUP(E2, A2:C8, 3, FALSE)`
+* Thử đổi ô E2 thành mã khác rồi đổi lại thành `IE02` như ban đầu.
+#### **3. Lọc dữ liệu (AutoFilter):**
+* Bật bộ lọc **Filter** ở sheet `DangKy`.
+* Cột `tong_hoc_phi`, chọn lọc những dòng có giá trị **>= 6000000** (Lớn hơn hoặc bằng 6 triệu).
+* **Đếm xem còn bao nhiêu dòng hiển thị** để tí nữa ghi số đó vào bài làm.
+#### **4. Trả lời câu hỏi về dấu `$`:**
+* **Vì sao phải dùng dấu `$` (ví dụ `$A$2:$C$8`)?** 
+  Dấu `$` dùng để **"ghim" cố định** bảng tra cứu lại. Khi bạn kéo công thức từ trên xuống dưới, bảng tra cứu sẽ đứng yên một chỗ không bị chạy đi đâu cả.
+* **Nếu bỏ dấu `$` thì sao?** 
+  Nếu bỏ, khi bạn kéo công thức xuống dòng dưới, bảng tra cứu cũng sẽ bị trôi xuống theo, khiến Excel không tìm thấy dữ liệu và báo lỗi `#N/A`.
+---
